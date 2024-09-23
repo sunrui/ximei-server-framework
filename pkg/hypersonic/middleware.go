@@ -152,10 +152,10 @@ func safeRecoverMiddleware(ctx *gin.Context) {
 	defer func() {
 		if recovered := recover(); recovered != nil {
 			if e, ok := recovered.(*Error); ok {
-				ctx.AbortWithStatusJSON(http.StatusInternalServerError, *e)
+				ctx.AbortWithStatusJSON(http.StatusBadRequest, *e)
 			} else {
 				e = NewErrorWithArgv(CodeInternalError, fmt.Sprintf("%+v", recovered), getStack(0, 10))
-				ctx.AbortWithStatusJSON(http.StatusInternalServerError, *e)
+				ctx.AbortWithStatusJSON(http.StatusBadRequest, *e)
 			}
 		}
 	}()

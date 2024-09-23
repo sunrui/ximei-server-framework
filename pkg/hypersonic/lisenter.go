@@ -31,13 +31,13 @@ func NewEchoListener() EchoListener {
 
 // OnLimit 限制调用
 func (echoListener EchoListener) OnLimit(limitType LimitType, req *Request) {
-	errMsg := fmt.Sprintf("OnLimit Ip => %s, Uri => %s", req.GetIp(), req.GetUri())
+	msg := fmt.Sprintf("OnLimit Ip => %s, Uri => %s", req.GetIp(), req.GetUri())
 
 	switch limitType {
 	case LimitIp:
-		slog.Error(errMsg)
+		slog.Error(msg)
 	case LimitUserId:
-		slog.Error(errMsg + fmt.Sprintf(", UserId => %s", req.Token.MustGetUserId()))
+		slog.Error(msg + fmt.Sprintf(", UserId => %s", req.Token.MustGetUserId()))
 	}
 }
 
