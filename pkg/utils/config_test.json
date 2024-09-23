@@ -1,0 +1,18 @@
+{
+  "environment": "dev",
+  "dev": {
+    "host": "localhost",
+    "port": 6379,
+    "password": "dev"
+  },
+  "test": {
+    "host": "localhost",
+    "port": 6379,
+    "password": "test"
+  },
+  "prod": {
+    "host": "127.0.0.1",
+    "port": 16379,
+    "password": "prod"
+  }
+}
