@@ -14,6 +14,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Config 配置
+type Config struct {
+	Listener Listener // 适配器
+	I18n     *I18n    // 国际化
+	IsDev    bool     // 是否开发模式
+}
+
 // Hypersonic 服务
 type Hypersonic struct {
 	engine   *gin.Engine // gin 引擎
@@ -22,21 +29,21 @@ type Hypersonic struct {
 }
 
 // New 创建
-func New(listener Listener, i18n *I18n, isDev bool) (*Hypersonic, error) {
+func New(config Config) (*Hypersonic, error) {
 	// 创建引擎
 	engine := gin.New()
 
 	// 创建服务
 	hypersonic := &Hypersonic{
 		engine:   engine,
-		listener: listener,
-		i18n:     i18n,
+		listener: config.Listener,
+		i18n:     config.I18n,
 	}
 
 	// 注册中间件
 	hypersonic.registerMiddleware(engine)
 
-	if isDev {
+	if config.IsDev {
 		// 注册文档中间件
 		engine.GET("/doc/*any", swaggerMiddleware)
 		gin.SetMode(gin.DebugMode)

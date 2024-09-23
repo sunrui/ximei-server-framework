@@ -53,7 +53,11 @@ func TestHypersonic(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	h, err := hypersonic.New(hypersonic.NewEchoListener(), i18n, true)
+	h, err := hypersonic.New(hypersonic.Config{
+		Listener: hypersonic.NewEchoListener(),
+		I18n:     i18n,
+		IsDev:    true,
+	})
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
