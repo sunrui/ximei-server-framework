@@ -9,8 +9,8 @@ package hypersonic
 import (
 	"encoding/json"
 	"errors"
-	"framework/pkg/id"
 	"framework/pkg/redis"
+	"framework/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"strings"
@@ -125,7 +125,7 @@ func newRedisTokenStorage(redis *redis.Redis) redisTokenStorage {
 
 // Set 设置
 func (redisTokenStorage redisTokenStorage) Set(payload any, maxAge time.Duration) (value string, err error) {
-	key := id.NanoId(12)
+	key := utils.NanoId(12)
 	payloadBytes, _ := json.MarshalIndent(payload, "", "\t")
 	redisTokenStorage.redis.Set(key, payloadBytes, maxAge)
 	return key, nil

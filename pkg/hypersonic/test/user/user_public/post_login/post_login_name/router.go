@@ -80,7 +80,7 @@ func (router Router) invoke(req *hypersonic.Request) (*hypersonic.Data, *hyperso
 		isAddOk := router.nameLimit.Add(param.Name)
 
 		// 验证密码成功
-		if userOne.IsValidatePassword(param.Password) {
+		if userOne.IsValidPassword(param.Password) {
 			userId = userOne.Id
 		} else {
 			if isAddOk {

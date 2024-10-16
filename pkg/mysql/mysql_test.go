@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"framework/pkg/hypersonic"
-	"framework/pkg/id"
+	"framework/pkg/utils"
 	"testing"
 
 	"gorm.io/sharding"
@@ -293,7 +293,7 @@ func TestSharding(t *testing.T) {
 
 	for i := 0; i < 1000; i++ {
 		// this record will insert to orders_03
-		err = db.DB.Exec("INSERT INTO orders(user_id,product_id) VALUES(?,?)", id.Uuid(), i).Error
+		err = db.DB.Exec("INSERT INTO orders(user_id,product_id) VALUES(?,?)", utils.Uuid(), i).Error
 		if err != nil {
 			fmt.Println(err)
 		}

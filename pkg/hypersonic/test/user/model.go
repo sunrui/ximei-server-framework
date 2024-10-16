@@ -33,7 +33,6 @@ type User struct {
 
 // BeforeSave 创建前
 func (user *User) BeforeSave(tx *gorm.DB) error {
-	// 生成 bcrypt 密码
 	if pw, err := bcrypt.GenerateFromPassword([]byte(user.Password), 0); err != nil {
 		tx.Statement.SetColumn("password", pw)
 		return nil
@@ -42,8 +41,8 @@ func (user *User) BeforeSave(tx *gorm.DB) error {
 	}
 }
 
-// IsValidatePassword 验证密码
-func (user *User) IsValidatePassword(password string) bool {
+// IsValidPassword 验证密码
+func (user *User) IsValidPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	return err == nil
 }

@@ -7,8 +7,8 @@
 package mysql
 
 import (
-	"framework/pkg/id"
 	"framework/pkg/ip2region"
+	"framework/pkg/utils"
 	"time"
 
 	"gorm.io/gorm"
@@ -21,7 +21,7 @@ type ModelId struct {
 
 // BeforeCreate 创建前回调
 func (modelId *ModelId) BeforeCreate(*gorm.DB) (err error) {
-	modelId.Id = id.NanoId(16)
+	modelId.Id = utils.NanoId(16)
 	return nil
 }
 
